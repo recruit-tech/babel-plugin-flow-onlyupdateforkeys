@@ -29,8 +29,11 @@ export default compose(
 import React, { Component } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-type propsType = { foo: string; bar: number; };
+import t from 'flow-runtime';
+const propsType = t.type('propsType', t.object(t.property('foo', t.string()), t.property('bar', t.number())));
 
+
+@t.annotate(t.class('Foo', t.extends(Component), t.property('props', propsType), t.method('render')))
 class Foo extends Component {
   props: propsType;
 
@@ -71,6 +74,8 @@ export default compose(
 import React, { Component } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
+import t from 'flow-runtime';
+@t.annotate(t.class('Foo', t.extends(Component), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
 class Foo extends Component {
   props: { foo: string; bar: number; };
 
@@ -109,7 +114,9 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends React.Component {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(React.Component), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class Foo extends React.Component {
   props: { foo: string; bar: number; };
 
   render() {
@@ -145,7 +152,9 @@ export default compose(
 import React, { Component as Comp } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Comp {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(Comp), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class Foo extends Comp {
   props: { foo: string; bar: number; };
 
   render() {
@@ -196,7 +205,9 @@ export const Bar = compose(
 import React, { Component, PureComponent } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(Component), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class Foo extends Component {
   props: { foo: string; bar: number; };
 
   render() {
@@ -205,7 +216,8 @@ export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Comp
   }
 });
 
-export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(class Bar extends PureComponent {
+export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(@t.annotate(t.class('Bar', t.extends(PureComponent), t.property('props', t.object(t.property('firstName', t.string()), t.property('lastName', t.string()), t.property('age', t.number()))), t.method('render')))
+class Bar extends PureComponent {
   props: { firstName: string; lastName: string; age: number; };
 
   render() {
@@ -241,7 +253,9 @@ export default compose(
 import React, { Component } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(Component), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class Foo extends Component {
   props: { foo: string; bar: number; };
 
   render() {
@@ -277,7 +291,9 @@ export default compose(
 import React, { PureComponent } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends PureComponent {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(PureComponent), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class Foo extends PureComponent {
   props: { foo: string; bar: number; };
 
   render() {
@@ -315,9 +331,12 @@ export default compose(
 import React, { Component } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-type propsType = { foo: string; bar: number; };
+import t from 'flow-runtime';
+const propsType = t.type('propsType', t.object(t.property('foo', t.string()), t.property('bar', t.number())));
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(@t.annotate(t.class('Foo', t.extends(Component), t.property('props', propsType), t.method('render')))
+class Foo extends Component {
   props: propsType;
 
   render() {
@@ -355,7 +374,9 @@ export default compose(
 import React, { Component } from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-const Foo = class extends Component {
+import t from 'flow-runtime';
+const Foo = @t.annotate(t.class('AnonymousClass', t.extends(Component), t.property('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))), t.method('render')))
+class extends Component {
   props: { foo: string; bar: number; };
 
   render() {
@@ -390,10 +411,11 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys, setDisplayName } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']), setDisplayName('Foo'))((props: { foo: string; bar: number; }) => {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']), setDisplayName('Foo'))(t.annotate((props: { foo: string; bar: number; }) => {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -420,12 +442,14 @@ function Foo(props: { foo: string, bar: number }) {
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
+import t from 'flow-runtime';
 export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
 
 function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
 }
+t.annotate(Foo, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number())))));
 "
 `;
 
@@ -452,11 +476,13 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
+import t from 'flow-runtime';
 function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
 }
 
+t.annotate(Foo, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number())))));
 export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
 "
 `;
@@ -490,12 +516,14 @@ function outer() {
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
+import t from 'flow-runtime';
 function outer() {
   function Foo(props: { foo: string; bar: number; }) {
     const { foo, bar } = props;
     return <div>{foo}-{bar}</div>;
   }
 
+  t.annotate(Foo, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number())))));
   function inner() {
     const Bar = compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
   }
@@ -528,13 +556,16 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-type propsType = { foo: string; bar: number; };
+import t from 'flow-runtime';
+const propsType = t.type('propsType', t.object(t.property('foo', t.string()), t.property('bar', t.number())));
+
 
 function Foo(props: propsType) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
 }
 
+t.annotate(Foo, t.function(t.param('props', propsType)));
 export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
 "
 `;
@@ -560,10 +591,11 @@ export default recompose.compose(
 import React from 'react';
 import { default as recompose } from 'recompose'; // eslint-disable-line import/no-named-default
 
-export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -588,10 +620,11 @@ export default recompose.compose(
 import React from 'react';
 import recompose from 'recompose';
 
-export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -618,10 +651,11 @@ import React from 'react';
 import compose from 'recompose/compose';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -646,10 +680,11 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -687,19 +722,20 @@ export const Bar = compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 
-export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(function Bar(props: { firstName: string; lastName: string; age: number; }) {
+export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(t.annotate(function Bar(props: { firstName: string; lastName: string; age: number; }) {
   const { firstName, lastName, age } = props;
   return <div>
       <span>{firstName}</span>
       <span>{lastName}</span>
       <span>{age}</span>
     </div>;
-});
+}, t.function(t.param('props', t.object(t.property('firstName', t.string()), t.property('lastName', t.string()), t.property('age', t.number()))))));
 "
 `;
 
@@ -726,12 +762,14 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-type propsType = { foo: string; bar: number; };
+import t from 'flow-runtime';
+const propsType = t.type('propsType', t.object(t.property('foo', t.string()), t.property('bar', t.number())));
 
-export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: propsType) {
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(t.annotate(function Foo(props: propsType) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', propsType))));
 "
 `;
 
@@ -760,10 +798,11 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-const Foo = function (props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+const Foo = t.annotate(function (props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-};
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number())))));
 
 export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
 "
@@ -792,10 +831,11 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-const Foo = (props: { foo: string; bar: number; }) => {
+import t from 'flow-runtime';
+const Foo = t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-};
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number())))));
 
 export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
 "
@@ -822,10 +862,11 @@ export default compose(
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 
-export default compose(onlyUpdateForKeys(['foo']))(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default compose(onlyUpdateForKeys(['foo']))(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;
 
@@ -910,9 +951,10 @@ export default compose(
 import React from 'react';
 import { compose, pure } from 'recompose';
 
-export default compose(pure)(function Foo(props: { foo: string; bar: number; }) {
+import t from 'flow-runtime';
+export default compose(pure)(t.annotate(function Foo(props: { foo: string; bar: number; }) {
   const { foo, bar } = props;
   return <div>{foo}-{bar}</div>;
-});
+}, t.function(t.param('props', t.object(t.property('foo', t.string()), t.property('bar', t.number()))))));
 "
 `;

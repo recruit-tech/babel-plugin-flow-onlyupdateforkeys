@@ -15,6 +15,7 @@ pluginTester({
       null, // placeholder for this plugin
       'syntax-flow',
       'syntax-jsx',
+      'flow-runtime',
     ],
   },
 

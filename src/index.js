@@ -11,33 +11,35 @@ export default function plugin({ types: t }) {
 
   return {
     visitor: {
-      Program(path, { opts }) {
+      Program(rootPath, { opts }) {
         componentRegistry.clear()
         composeRegistry.clear()
         onlyUpdateForKeysRegistry.clear()
         flowTypeRegistry.clear()
-      },
 
-      ImportDeclaration(path) {
-        componentRegistry.scan(path)
-        composeRegistry.scan(path)
-        onlyUpdateForKeysRegistry.scan(path)
-      },
+        rootPath.traverse({
+          ImportDeclaration(path) {
+            componentRegistry.scan(path)
+            composeRegistry.scan(path)
+            onlyUpdateForKeysRegistry.scan(path)
+          },
 
-      TypeAlias(path) {
-        flowTypeRegistry.scan(path)
+          TypeAlias(path) {
+            flowTypeRegistry.scan(path)
+          },
+
+          CallExpression(path) {
+            if (isManipulationTarget(path)) {
+              const keys = getKeys(path)
+              if (keys) {
+                path.setData(KEY_MANIPULATION_TARGET, keys)
+              }
+            }
+          },
+        })
       },
 
       CallExpression: {
-        enter(path) {
-          if (isManipulationTarget(path)) {
-            const keys = getKeys(path)
-            if (keys) {
-              path.setData(KEY_MANIPULATION_TARGET, keys)
-            }
-          }
-        },
-
         exit(path) {
           const keys = path.getData(KEY_MANIPULATION_TARGET)
           if (keys) {
