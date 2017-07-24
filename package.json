@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-flow-onlyupdateforkeys",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A babel plugin to generate args of recompose.onlyUpdateForKeys from flow type.",
   "keywords": [
     "babel",
