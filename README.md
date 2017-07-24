@@ -72,3 +72,19 @@ require("babel-core").transform("code", {
   plugins: ["flow-onlyupdateforkeys"]
 });
 ```
+
+### Using with flow-runtime
+
+Note that when using this plugin with [flow-runtime](https://www.npmjs.com/package/flow-runtime),
+you must ensure that babel-plugin-flow-onlyupdateforkeys is included before babel-plugin-flow-runtime.
+
+**.babelrc**
+
+```json
+{
+  "plugins": [
+    "flow-onlyupdateforkeys",
+    "flow-runtime"
+  ]
+}
+```
