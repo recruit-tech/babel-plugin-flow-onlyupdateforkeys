@@ -1,0 +1,11 @@
+{
+  "rules": {
+    // React
+    "react/prefer-stateless-function": "off",
+
+    // eslint-plugin-import
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
+}

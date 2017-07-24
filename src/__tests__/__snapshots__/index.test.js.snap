@@ -1,0 +1,918 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1. class-component/class-declaration-type-alias.js 1`] = `
+"
+// @flow
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+type propsType = { foo: string, bar: number }
+
+class Foo extends Component {
+  props: propsType
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+type propsType = { foo: string; bar: number; };
+
+class Foo extends Component {
+  props: propsType;
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+}
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`2. class-component/class-declaration.js 1`] = `
+"
+// @flow
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+class Foo extends Component {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+class Foo extends Component {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+}
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`3. class-component/import-default.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends React.Component {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends React.Component {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`4. class-component/import-rename.js 1`] = `
+"
+// @flow
+import React, { Component as Comp } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends Comp {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component as Comp } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Comp {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`5. class-component/multiple-component.js 1`] = `
+"
+// @flow
+/* eslint-disable react/no-multi-comp */
+import React, { Component, PureComponent } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends Component {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+export const Bar = compose(
+  onlyUpdateForKeys(),
+)(class Bar extends PureComponent {
+  props: { firstName: string, lastName: string, age: number }
+
+  render() {
+    const { firstName, lastName, age } = this.props
+    return (
+      <div>{firstName}-{lastName}({age})</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+/* eslint-disable react/no-multi-comp */
+import React, { Component, PureComponent } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+
+export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(class Bar extends PureComponent {
+  props: { firstName: string; lastName: string; age: number; };
+
+  render() {
+    const { firstName, lastName, age } = this.props;
+    return <div>{firstName}-{lastName}({age})</div>;
+  }
+});
+"
+`;
+
+exports[`6. class-component/react-component.js 1`] = `
+"
+// @flow
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends Component {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`7. class-component/react-pure-component.js 1`] = `
+"
+// @flow
+import React, { PureComponent } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends PureComponent {
+  props: {foo: string, bar: number}
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { PureComponent } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends PureComponent {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`8. class-component/type-alias.js 1`] = `
+"
+// @flow
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+type propsType = { foo: string, bar: number }
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends Component {
+  props: propsType
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+type propsType = { foo: string; bar: number; };
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(class Foo extends Component {
+  props: propsType;
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`9. class-component/variable-class-expression.js 1`] = `
+"
+// @flow
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+const Foo = class extends Component {
+  props: { foo: string, bar: number }
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+const Foo = class extends Component {
+  props: { foo: string; bar: number; };
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+};
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`10. functional-component/arrow-function-expression.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys, setDisplayName } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+  setDisplayName('Foo'),
+)((props: { foo: string, bar: number }) => {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys, setDisplayName } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']), setDisplayName('Foo'))((props: { foo: string; bar: number; }) => {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`11. functional-component/function-declaration-after.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+
+function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+}
+"
+`;
+
+exports[`12. functional-component/function-declaration-before.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+}
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`13. functional-component/function-declaration-nested-scope.js 1`] = `
+"
+// @flow
+/* eslint-disable no-unused-vars */
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+function outer() {
+  function Foo(props: { foo: string, bar: number }) {
+    const { foo, bar } = props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+
+  function inner() {
+    const Bar = compose(
+      onlyUpdateForKeys(),
+    )(Foo)
+  }
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+function outer() {
+  function Foo(props: { foo: string; bar: number; }) {
+    const { foo, bar } = props;
+    return <div>{foo}-{bar}</div>;
+  }
+
+  function inner() {
+    const Bar = compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+  }
+}
+"
+`;
+
+exports[`14. functional-component/function-declaration-type-alias.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+type propsType = { foo: string, bar: number }
+
+function Foo(props: propsType) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+type propsType = { foo: string; bar: number; };
+
+function Foo(props: propsType) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+}
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`15. functional-component/import-default-rename.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { default as recompose } from 'recompose' // eslint-disable-line import/no-named-default
+
+export default recompose.compose(
+  recompose.onlyUpdateForKeys(),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { default as recompose } from 'recompose'; // eslint-disable-line import/no-named-default
+
+export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`16. functional-component/import-default.js 1`] = `
+"
+// @flow
+import React from 'react'
+import recompose from 'recompose'
+
+export default recompose.compose(
+  recompose.onlyUpdateForKeys(),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import recompose from 'recompose';
+
+export default recompose.compose(recompose.onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`17. functional-component/import-direct.js 1`] = `
+"
+// @flow
+import React from 'react'
+import compose from 'recompose/compose'
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import compose from 'recompose/compose';
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`18. functional-component/import-named.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`19. functional-component/multiple-components.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+export const Bar = compose(
+  onlyUpdateForKeys(),
+)(function Bar(props: { firstName: string, lastName: string, age: number }) {
+  const { firstName, lastName, age } = props
+  return (
+    <div>
+      <span>{firstName}</span>
+      <span>{lastName}</span>
+      <span>{age}</span>
+    </div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+
+export const Bar = compose(onlyUpdateForKeys(['firstName', 'lastName', 'age']))(function Bar(props: { firstName: string; lastName: string; age: number; }) {
+  const { firstName, lastName, age } = props;
+  return <div>
+      <span>{firstName}</span>
+      <span>{lastName}</span>
+      <span>{age}</span>
+    </div>;
+});
+"
+`;
+
+exports[`20. functional-component/type-alias.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+type propsType = { foo: string, bar: number }
+
+export default compose(
+  onlyUpdateForKeys(),
+)(function Foo(props: propsType) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+type propsType = { foo: string; bar: number; };
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(function Foo(props: propsType) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`21. functional-component/variable-anonymous-function.js 1`] = `
+"
+// @flow
+/* eslint-disable func-names */
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+const Foo = function (props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+/* eslint-disable func-names */
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+const Foo = function (props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+};
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`22. functional-component/variable-arrow-function.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+const Foo = (props: { foo: string, bar: number }) => {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+}
+
+export default compose(
+  onlyUpdateForKeys(),
+)(Foo)
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+const Foo = (props: { foo: string; bar: number; }) => {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+};
+
+export default compose(onlyUpdateForKeys(['foo', 'bar']))(Foo);
+"
+`;
+
+exports[`23. not-applicable/onlyupdateforkeys-with-arg.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(['foo']),
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys(['foo']))(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`24. not-applicable/without-flowtype-class.js 1`] = `
+"
+import React, { Component } from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(class Foo extends Component {
+  props
+
+  render() {
+    const { foo, bar } = this.props
+    return (
+      <div>{foo}-{bar}</div>
+    )
+  }
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import React, { Component } from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys())(class Foo extends Component {
+  props;
+
+  render() {
+    const { foo, bar } = this.props;
+    return <div>{foo}-{bar}</div>;
+  }
+});
+"
+`;
+
+exports[`25. not-applicable/without-flowtype-functional.js 1`] = `
+"
+import React from 'react'
+import { compose, onlyUpdateForKeys } from 'recompose'
+
+export default compose(
+  onlyUpdateForKeys(),
+)(function Foo(props) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import React from 'react';
+import { compose, onlyUpdateForKeys } from 'recompose';
+
+export default compose(onlyUpdateForKeys())(function Foo(props) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
+
+exports[`26. not-applicable/without-onlyupdateforkeys.js 1`] = `
+"
+// @flow
+import React from 'react'
+import { compose, pure } from 'recompose'
+
+export default compose(
+  pure,
+)(function Foo(props: { foo: string, bar: number }) {
+  const { foo, bar } = props
+  return (
+    <div>{foo}-{bar}</div>
+  )
+})
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+// @flow
+import React from 'react';
+import { compose, pure } from 'recompose';
+
+export default compose(pure)(function Foo(props: { foo: string; bar: number; }) {
+  const { foo, bar } = props;
+  return <div>{foo}-{bar}</div>;
+});
+"
+`;
